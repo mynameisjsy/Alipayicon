@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>test</title>
+	</head>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<body>
+		<form id="form1" action="#">
+			可用元素：<input type="text" value="可用的文本框" /></br>
+			不可用元素：<input type="text" disabled="disabled" value="不可用的文本框" /></br>
+			可用元素：<input type="text" value="可用的文本框" /></br>
+			不可用元素：<input type="text" disabled="disabled" value="可用的文本框" /></br>
+			</br>
+			<input type="checkbox"  name="check" value="test1"  />
+			<input type="checkbox"  name="check" value="test2"  />
+			<input type="checkbox"  name="check" value="test3"  />
+			<input type="checkbox"  name="check" value="test4"  />
+			<input type="checkbox"  name="check" value="test5"  />
+			</br>
+			<input type="button" value="点击"  id="btn1"/>
+			</br>
+			</br>
+			<select name="test" multiple="multiple" >
+				<option selected="selected">浙江</option>
+				<option selected="selected">湖南</option>
+				<option>北京</option>
+				<option>天津</option>
+				<option>湖北</option>
+			</select>
+			
+			<input type="file"  />
+		</form>
+		<script>
+			/*var btn1=document.getElementById("btn1");
+			btn1.onclick=function(){
+				
+				var arrays=new Array();
+				var items=document.getElementsByName("check");
+				for(var i=0;i<items.length;i++){
+					if(items[i].checked){
+						arrays.push(items[i].value);
+					}
+				}
+				
+				alert(arrays.length);
+				
+			}*/
+			$("#btn1").click(function(){
+				alert($("input:checked").length);
+				
+			})
+		   // $("#form1 input:enabled").val("你是猪吧");
+		    console.log($("select option:selected").text())
+		</script>
+	</body>
+</html>

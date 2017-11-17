@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<body>
+		<input type="checkbox" id="cr"/><label for="cr">我已经阅读了上面的制度</label>
+		
+		<input type="checkbox" value="1" name="check" checked="checked" />
+		<input type="checkbox" value="2" name="check" checked="checked" />
+		<input type="checkbox" value="3" name="check" checked="checked" />
+		<input type="button" value="选择的个数" id="btn" />
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var $cr=$("#cr");
+				var cr=$cr[0];
+				$cr.click(function(){
+					if($cr.is(":checked")){
+						alert("感谢您的支持！您可以继续操作");
+					}
+				})
+			});
+			
+			var btn=document.getElementById("btn");
+			btn.onclick=function(){
+				var arrays=new Array();
+				var items=document.getElementsByName("check");
+				for(var i=0;i<items.length;i++){
+					if(items[i].checked){
+					arrays.push(items[i].value);
+					}
+				}
+				alert(arrays.length);
+			}
+		</script>
+	</body>
+</html>

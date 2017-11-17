@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>滑动</title>
+	</head>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<style>
+		li{
+			list-style-type: none;
+		}
+		.content-list img{
+			width: 120px;
+			height: 150px;
+		}
+		.Mshow{
+			width: 600px;
+			height: 250px;
+			border: 1px solid black;
+			margin: 0px auto;
+			overflow: hidden;
+		}
+		.Mcaption{
+			widows: 600px;
+			height: 40px;
+			border-bottom: 1px solid black;	
+		}
+		.Mtip div{
+			width: 10px;
+			height: 10px;
+			border: 1px solid violet;
+			display: inline;
+			float: left;
+			margin-left: 5px;
+			border-radius: 50%;
+		}
+		.Mtip{
+			position: relative;
+            margin-left: 120px;
+            margin-top: -40px;
+		}
+		.prev{
+		 position: absolute;
+         margin-left: 20px;
+         margin-top: -5px; 
+		}
+		.btn{
+			cursor: pointer;
+		}
+		.next{
+		position: absolute;
+        margin-left: 60px;
+        margin-top: -5px;
+		}
+		.content-list ul{
+			
+		}
+		.content-list ul li{
+			display:inline; 
+			float:left; 
+			margin:0;
+			padding:7px;
+		}
+		.content-list{
+		    position:absolute;
+			 
+			 top:0px; 
+			 left:0px;
+		}
+		.current{
+			background-color:blue;
+		}
+		.Mcontent{
+			position:relative;
+			 width:592px; 
+			 height:200px; 
+			 overflow:hidden;
+		}
+	</style>
+	<body>
+		<div class="Mshow">
+			<div class="Mcaption">
+				<h2 class="Mcarton">Srcoll</h2>
+				<div class="Mtip">
+					<div class="current"></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+				<div class="btn">
+					<span class="prev"><<</span>
+					<span class="next">>></span></span>
+				</div>
+			</div>
+			<div class="Mcontent">
+				<div class="content-list">
+					<ul>
+						<li><img src="img/1.PNG"/></li>
+						<li><img src="img/1.PNG"/></li>
+						<li><img src="img/1.PNG"/></li>
+						<li><img src="img/1.PNG"/></li>
+						<li><img src="img/1.PNG"/></li>	
+						<li><img src="img/1.PNG"/></li>	
+						<li><img src="img/1.PNG"/></li>	
+						<li><img src="img/1.PNG"/></li>	
+						<li><img src="img/1.PNG"/></li>	
+						<li><img src="img/1.PNG"/></li>	
+						<li><img src="img/1.PNG"/></li>	
+						<li><img src="img/1.PNG"/></li>	
+						<li><img src="img/1.PNG"/></li>	
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script>
+			$(function(){
+				var page=1;
+				var i=4;
+				$("span.next").click(function(){
+					var parent=$(this).parents("div.Mshow");
+					var show=parent.find("div.content-list ")
+					var content=parent.find("div.Mcontent");
+					var width=content.width();
+					var len=show.find("li").length;
+					
+					var page_count=Math.ceil(len/i);
+					if(!show.is(":animated")){
+					if(page==page_count){
+						show.animate({left:"0px"},"slow");
+						page=1;
+					}else{
+						show.animate({left:"-="+width},"slow");
+						page++;
+					}
+					$(".Mtip div").eq((page-1)).addClass("current")
+					.siblings().removeClass("current");
+					}
+				});
+				$("span.prev").click(function(){
+					var parent=$(this).parents("div.Mshow");
+					var show=parent.find("div.content-list ")
+					var content=parent.find("div.Mcontent");
+					var width=content.width();
+					var len=show.find("li").length;
+					
+					var page_count=Math.ceil(len/i);
+					if(!show.is(":animated")){
+					if(page==1){
+						show.animate({left:"-="+width*(page_count-1)},"slow");
+						page=page_count;
+					}else{
+						show.animate({left:"+="+width},"slow");
+						page--;
+					}
+					$(".Mtip div").eq((page-1)).addClass("current")
+					.siblings().removeClass("current");
+					}
+				});
+				
+				setInterval(function(){
+					$(".content-list").animate({left:"-="+592});
+				},2000)
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>shopping</title>
+	</head>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<style>
+		a{
+			text-decoration: none;
+		}
+		li{
+			list-style-type: none;
+			float: left;
+		}
+		.SubCateBox{
+			width: 500px;
+			height: 200px;
+			border: 1px  solid black;
+			position: absolute;
+			margin-left: 450px;
+			
+		}
+		li:nth-child(1){
+			margin-left: -40px;
+		}
+		li:nth-child(2){
+			margin-left: 110px;
+		}
+		li:nth-child(3){
+			margin-left: 110px;
+		}
+		li:nth-child(4){
+			margin-left: -40px;
+            margin-top: 20px;
+		}
+		li:nth-child(5){
+			margin-top: 20px;
+            margin-left: 110px;
+		}
+		li:nth-child(6){
+			margin-top: 20px;
+            margin-left: 110px;
+		}
+		li:nth-child(7){
+			margin-left: -40px;
+            margin-top: 20px;
+		}
+		li:nth-child(8){
+			margin-top: 20px;
+            margin-left: 110px;
+		}
+		li:nth-child(9){
+			margin-top: 20px;
+            margin-left: 110px;
+		}
+		li:nth-child(10){
+			margin-left: -40px;
+            margin-top: 20px;
+		}
+		li:nth-child(11){
+			margin-top: 20px;
+            margin-left: 114px;
+		}
+		li:nth-child(12){
+			margin-top: 20px;
+            margin-left: 65px;
+		}
+		span{
+			
+			border: 1px solid black;
+			margin-left: -293px;
+			margin-top: 156px;
+			position: absolute;
+		}
+	</style>
+	<body>
+		<div class="SubCateBox">
+			<ul>
+				<li ><a href="#">佳能</a><i>(30440)</i></li>
+				<li ><a href="#">索尼</a><i>(27220)</i></li>
+				<li ><a href="#">三星</a><i>(20880)</i></li>
+				<li><a href="#">尼康</a><i>(17821)</i></li>
+				<li><a href="#">松下</a><i>(12289)</i></li>
+				<li><a href="#">卡西欧</a><i>(8242)</i></li>
+				<li><a href="#">富士</a><i>(14884)</i></li>
+				<li><a href="#">柯达</a><i>(95220)</i></li>
+				<li><a href="#">宾得</a><i>(12205)</i></li>
+				<li><a href="#">明基</a><i>(1466)</i></li>
+				<li><a href="#">爱国者</a><i>(3091)</i></li>
+				<li><a href="#">其他品牌相机</a><i>(7275)</i></li>				
+			</ul>
+			<div class="showmore">
+			    <a href="#" id="a1"><span>显示全部品牌</span></a>
+		    </div> 
+		</div>
+		<script>
+			$(function(){
+				var $category=$("ul li:gt(5):not(:last)");
+				$category.hide();
+				var $togglebtn=$("div.showmore>a");
+				$togglebtn.click(function(){
+					if($category.is(":visible")){
+						$category.hide();
+						$(this).find("span")
+						.text("显示全部品牌");
+						
+						$("ul li").removeClass("o");
+				}else{
+					$category.show();
+					$(this).find("span")
+					.text("精简显示品牌");
+					$("ul li").filter(":contains('佳能'),:contains('尼康'),:contains('柯达')")
+					.addClass("on");
+				}
+				return false;
+					
+				});
+				
+				
+			})
+			
+		</script>
+		
+	</body>
+</html>

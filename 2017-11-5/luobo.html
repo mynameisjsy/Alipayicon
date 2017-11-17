@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>轮播图</title>
+	</head>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.ig{
+			position: absolute;
+			left: 30%;
+			top: 20%;
+		}
+		.btn{
+			position: absolute;
+			font-size: 50px;
+			background-color: rgba(0,0,0,0.2);
+			height: 80px;
+			width: 40px;
+			line-height: 80px;
+			top: 35%;
+			left: 30%;
+			cursor: pointer;
+		}
+		.btn2{
+			left: 73.5%;
+		}
+		.tab{
+			position: absolute;
+			top: 420px;
+			left: 710px;
+		}
+		.tabs{
+			width: 20px;
+			height: 20px;
+			border-radius: 100%;
+			border: 1px black solid;
+			float:left;
+			margin-left: 5px;
+		}
+		.current{
+			background-color: red;
+		}
+	</style>
+	<body>
+		<div class="scroll">
+			<img class="ig" src="img/1.jpg.jpg" />
+			<img class="ig" src="img/2.jpg.jpg" />
+			<img class="ig" src="img/3.jpg.jpg" />
+			<img class="ig" src="img/4.jpg.jpg" />
+			<img class="ig" src="img/5.jpg.jpg" />
+			<img class="ig" src="img/6.jpg.jpg" />
+		</div>
+		<div>
+		    <div class="btn btn1"><</div>
+			<div class="btn btn2">></div>
+		</div>
+		<div class="tab">
+			<div class="tabs current"></div>
+			<div class="tabs"></div>
+			<div class="tabs"></div>
+			<div class="tabs"></div>
+			<div class="tabs"></div>
+			<div class="tabs"></div>	
+		</div>
+		<script>
+			var i=0;
+			var timmer;
+			var t;
+			$(function(){
+				$(".ig").eq(0).show().siblings().hide();
+				 Showtime(); 
+				$(".tabs").hover(function(){
+					clearInterval(timmer);
+					i=$(this).index();
+					Show();
+				},function(){
+					Showtime();
+				})
+				$(".btn2").click(function(){
+					clearInterval(timmer);
+				    if(i==5){
+				    	i=-1;
+				    }
+				    i++;
+				    Show();
+				    Showtime();
+				});
+				$(".btn1").click(function(){
+					clearInterval(timmer);
+					if(i==0){
+						i=6;
+					}
+					i--;
+					Show();
+					Showtime();
+				}
+				);
+				function Showtime(){
+					 timmer=setInterval(function(){
+					Show();
+					i++;
+					if(i==6){
+						i=0;
+					}	
+				},2000);
+				}
+				function Show(){
+					$(".ig").eq(i).fadeIn().siblings().fadeOut();
+					$(".tabs").eq(i).addClass("current").siblings().removeClass("current")
+				}
+			})
+			
+		</script>
+	</body>
+</html>

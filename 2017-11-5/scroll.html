@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>动画</title>
+	</head>
+	<style>
+		* { margin:0; padding:0; word-break:break-all; }
+body { background:#FFF; color:#333; font:12px/1.5em Helvetica, Arial, sans-serif; }
+h1, h2, h3, h4, h5, h6 { font-size:1em; }
+a { color:#2B93D2; text-decoration:none; }
+a:hover { color:#E31E1C; text-decoration:underline; }
+ul, li { list-style:none; }
+fieldset, img { border:none; }
+
+/* v_show style */
+.v_show { width:595px; margin:20px 0 1px 60px; }
+.v_caption { height:35px; overflow:hidden; }
+.v_caption h2 { float:left; width:84px; height:35px; overflow:hidden;text-indent:-9999px; }
+.v_caption .cartoon { background-position: 0 -100px; }
+.v_caption .variety { background-position:-100px -100px; }
+.highlight_tip { display:inline; float:left; margin:14px 0 0 10px; }
+.highlight_tip span { display:inline; float:left; width:7px; height:7px;border-radius: 50%; border:1px solid black;overflow:hidden; margin:0 2px;  text-indent:-9999px; }
+.highlight_tip .current { background-position:0 -220px;background-color: blue; }
+.change_btn { float:left; margin:7px 0 0 10px; }
+.change_btn span { display:block; float:left; width:30px; height:23px; overflow:hidden;  cursor:pointer; }
+.change_btn .prev { background-position:0 -400px;  }
+.change_btn .next { width:31px; background-position:-30px -400px; }
+.v_caption em { display:inline; float:right; margin:10px 12px 0 0; font-family:simsun; }
+.v_content { position:relative; width:592px; height:160px; overflow:hidden; border-right:1px solid #E7E7E7; border-bottom:1px solid #E7E7E7; border-left:1px solid #E7E7E7; }
+.v_content_list { position:absolute; width:2500px;top:0px; left:0px; }
+.v_content ul {float:left;}
+.v_content ul li { display:inline; float:left; margin:10px 2px 0; padding:8px;  }
+.v_content ul li a { display:block; width:128px; height:80px; overflow:hidden; }
+.v_content ul li img {  width:128px; height:96px; }
+.v_content ul li h4 { width:128px; height:18px; overflow:hidden; margin-top:12px; font-weight:normal; }
+.v_content ul li h4 a { display:inline !important; height:auto !important; }
+.v_content ul li span { color:#666; }
+.v_content ul li em { color:#888; font-family:Verdana; font-size:0.9em; }
+	</style>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<body>
+		<div class="v_show">
+    <div class="v_caption">
+        <h2 class="cartoon" title="卡通动漫">卡通动漫</h2>
+        <div class="highlight_tip">
+            <span class="current">1</span><span>2</span><span>3</span><span>4</span>
+        </div>
+        <div class="change_btn">
+            <span class="prev" ><</span>
+            <span class="next">></span>
+        </div>
+        <em><a href="#">更多>></a></em>
+    </div>
+    <div class="v_content">
+        <div  class="v_content_list">
+            <ul>
+                <li><a href="#"><img src="img/1.PNG" alt="海贼王" /></a><h4><a href="#">海贼王</a></h4><span>播放:<em>28,276</em></span></li>
+                <li><a href="#"><img src="img/01.jpg" alt="海贼王" /></a><h4><a href="#">海贼王</a></h4><span>播放:<em>28,276</em></span></li>
+                <li><a href="#"><img src="img/01.jpg" alt="海贼王" /></a><h4><a href="#">海贼王</a></h4><span>播放:<em>28,276</em></span></li>
+                <li><a href="#"><img src="img/01.jpg" alt="海贼王" /></a><h4><a href="#">海贼王</a></h4><span>播放:<em>28,276</em></span></li>
+                <li><a href="#"><img src="img/02.jpg" alt="哆啦A梦" /></a><h4><a href="#">哆啦A梦</a></h4><span>播放:<em>33,326</em></span></li>
+                <li><a href="#"><img src="img/02.jpg" alt="哆啦A梦" /></a><h4><a href="#">哆啦A梦</a></h4><span>播放:<em>33,326</em></span></li>
+                <li><a href="#"><img src="img/02.jpg" alt="哆啦A梦" /></a><h4><a href="#">哆啦A梦</a></h4><span>播放:<em>33,326</em></span></li>
+                <li><a href="#"><img src="img/02.jpg" alt="哆啦A梦" /></a><h4><a href="#">哆啦A梦</a></h4><span>播放:<em>33,326</em></span></li>
+              
+             </ul>
+        </div>
+    </div>
+</div>
+		<script >
+			$(function(){
+    var page = 1;
+    var i = 4; //每版放4个图片
+    //向后 按钮
+    $("span.next").click(function(){    //绑定click事件
+         var $parent = $(this).parents("div.v_show");//根据当前点击元素获取到父元素
+         var $v_show = $parent.find("div.v_content_list"); //寻找到“视频内容展示区域”
+         var $v_content = $parent.find("div.v_content"); //寻找到“视频内容展示区域”外围的DIV元素
+         var v_width = $v_content.width() ;
+         var len = $v_show.find("li").length;
+         var page_count = Math.ceil(len / i) ;   //只要不是整数，就往大的方向取最小的整数
+         if( !$v_show.is(":animated") ){    //判断“视频内容展示区域”是否正在处于动画
+              if( page == page_count ){  //已经到最后一个版面了,如果再向后，必须跳转到第一个版面。
+                $v_show.animate({ left : '0px'}, "slow"); //通过改变left值，跳转到第一个版面
+                page = 1;
+                }else{
+                $v_show.animate({ left : '-='+v_width }, "slow");  //通过改变left值，达到每次换一个版面
+                page++;
+             }
+         }
+         $parent.find("span").eq((page-1))
+         .addClass("current").siblings().removeClass("current");
+   });
+    //往前 按钮
+    $("span.prev").click(function(){
+         var $parent = $(this).parents("div.v_show");//根据当前点击元素获取到父元素
+         var $v_show = $parent.find("div.v_content_list"); //寻找到“视频内容展示区域”
+         var $v_content = $parent.find("div.v_content"); //寻找到“视频内容展示区域”外围的DIV元素
+         var v_width = $v_content.width();
+         var len = $v_show.find("li").length;
+         var page_count = Math.ceil(len / i) ;   //只要不是整数，就往大的方向取最小的整数
+         if( !$v_show.is(":animated") ){    //判断“视频内容展示区域”是否正在处于动画
+              if( page == 1 ){  //已经到第一个版面了,如果再向前，必须跳转到最后一个版面。
+                $v_show.animate({ left : '-='+v_width*(page_count-1) }, "slow");
+                page = page_count;
+            }else{
+                $v_show.animate({ left :' +='+v_width }, "slow");
+                page--;
+            }
+        }
+        $parent.find("span").eq((page-1))
+        .addClass("current").siblings().removeClass("current");
+    });
+})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		.on{
+			color: wheat;
+		}
+		.panel{
+			margin: 0px auto;
+			position: relative;
+			width: 100px;
+			height: 100px;
+			border: 1px solid violet;
+			background-color: #96E555;
+			cursor: pointer;
+		}
+		
+	</style>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<body>
+		<input id="in1" type="button" value="切换按钮"  />
+		<p id="p1">测试toggle</p>
+		<input id="address" type="text" value="请输入邮箱地址" />
+		</br>
+		<li>
+			<a href="img/1.PNG" class="tooltip" title="漫画">
+				<img src="img/1.PNG" alt="蒋思意" />
+		    </a>
+		</li>
+		<div>
+			<div class="div1" style="border: 1px solid black;  width: 200px; height: 50px;">
+			    鼠标经过这里
+			</div>
+			<div class="div2" style="border: 1px solid black; width: 200px; height: 200px;display: none;">鼠标经过上面的区域时将会出现这里</div>
+			<input type="button" value="点击我" id="in2"  />
+			<div id="test">你是个傻逼</div>
+			<input type="text" id="in3" />
+			<div class="panel"></div>
+			<input type="file" style="color: transparent;"/>
+			<input type="text" id="m1"  />
+		</div>
+		<script>
+			
+			$(function(){
+				$("#in1").bind("click",function(){
+					$("#p1").slideToggle(1000);
+				})
+			});
+			$("#address").focus(function(){
+				var txt=$(this).val();
+				$(this).val("");
+			});
+			$("#address").blur(function(){
+				$(this).val(this.defaultValue);
+			});
+			
+			
+			$(function(){
+				
+				$(".tooltip").mouseover(function(e){
+					var x=10;
+					var y=20;
+					this.mytitle=this.title;
+					this.title="";
+					var imgtitle=this.mytitle?"</br>"+this.mytitle:"";
+					var tooltip="<div id='tooltip'><img src='"+this.href+"' alt='放大'/>"+imgtitle+"</div>";
+					$("body").append(tooltip);
+					$("#tooltip").css({
+						"top":(e.pageY+y)+"px",
+						"left":(e.pageX+x)+"px"
+					}).show("fast");
+					
+				}).mouseout(function(){
+					this.title=this.mytitle;
+					$("#tooltip").remove();
+				}).mousemove(function(e){
+					$("#tooltip").css({
+						
+						"top":(e.pageY+y)+"px",
+						"left":(e.pageX+x)+"px"
+					}).show("fast");
+				});
+			});
+			$(".div1").hover(function(){
+				$(this).addClass("on");
+				$(this).next().show();
+			},function(){
+				$(this).removeClass("on");
+				$(this).next().hide();
+			});
+			$(function(){
+				$("#in2").bind("click",function(){
+					$("#test").text("你是个帅哥");
+					
+				}).trigger("click");
+			});
+			
+			$("#in3").bind("focus",function(){
+				
+			}).triggerHandler("focus");
+			$(function(){
+				$("#test").bind("click",function(){
+					$("body").append("<p>click事件</p>");
+				}).bind("click.plugin",function(){
+					$("body").append("<p>click plugin</p>");
+				})
+			});
+			$(function(){
+				$(".panel").click(function(){
+					$(".panel").css("opacity","0.5");
+					$(".panel").animate({left:"+=500px",height:"200px",opacity:"1"},3000)
+					.delay(1000)
+					.animate({top:"200px",width:"200px"},3000,function(){
+						$(this).css("border","5px solid blue");
+					})
+					
+				});
+			})
+			
+			$(function(){
+				$(".panel").hover(function(){
+					$(".panel").stop(false,true).animate({height:"200px"},200)
+					                
+					                  .animate({width:"300px"},200);
+					
+				},function(){
+					$(".panel").stop(false,true).animate({height:"22px"},200)
+					                   .animate({width:"60px"},200);
+				})
+			})
+			$("#m1").focus(function(){
+				alert("s")
+			})
+			$("#m1").triggerHandler("focus");
+		</script>
+	</body>
+</html>

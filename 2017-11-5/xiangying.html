@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>响应式布局</title>
+	</head>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<style>
+		.header{
+			
+			height: 150px;
+			border: solid 1px black;
+			margin: 0 auto;
+		}
+		.content{
+			
+			height: 400px;
+			border: solid 1px black;
+			margin: 10px auto;
+		}
+		.footer{
+			height: 150px;
+			border: solid 1px black;
+			margin: 0 auto;
+		}
+		@media  screen and (min-width:900px ) {
+			.header,.footer{
+				width: 800px;
+			}
+			.content{
+				width: 800px;
+			}
+			.left{
+				width: 200px;
+				height: 400px;
+				border: solid 1px black;
+				float: left;
+			}
+			.midder{
+				width: 394px;
+				height: 400px;
+				border: solid 1px black;
+				float:  left;
+			}
+			.right{
+				width: 200px;
+				height: 400px;
+				border: solid 1px black;
+				float: left;
+			}
+		}
+		@media  screen and (min-width: 600px) and (max-width: 900px) {
+			.header,.footer{
+				width: 600px;
+			}
+			.content{
+				width: 600px;
+				height: 400px;
+			}
+			.left{
+				width: 200px;
+				height: 400px;
+				border: solid 1px black;
+				float: left;
+			}
+			.midder{
+				width: 396px;
+				height: 400px;
+				border: solid 1px red;
+				float:  left;
+			}
+			.right{
+				display: none;
+			}
+		}
+		@media only screen and (max-width: 600px) {
+			.header,.footer{
+				width: 300px;
+			}
+			.content{
+				width: 300px;
+				height: 400px;
+			}
+			.left{
+				display: none;
+			}
+			.midder{
+				width: 300px;
+				height: 400px;
+				border: solid 1px violet;
+			}
+			.right{
+				display: none;
+			}
+			
+		}
+	</style>
+	<body>
+		<div class="header"></div>
+		<div class="content">
+			<div class="left"></div>
+			<div class="midder"></div>
+			<div class="right"></div>
+		</div>
+		<div class="footer"></div>
+		<script>
+			$(".left").bind("click",function(e){
+				$(e.target).parent("div").css("background-color","red")
+			})
+		</script>
+	</body>
+</html>
